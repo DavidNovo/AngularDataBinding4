@@ -24,7 +24,7 @@ export class GameControlComponent implements OnInit {
   startGame() {
     // this.gameState.emit({
     //   running: true});
-    // console.log('Start game' + this.gameState);
+    console.log('Start game');
     this.interval = setInterval(() => {
       this.intervalFired.emit(this.lastNumber + 1);
       this.lastNumber++;
@@ -36,7 +36,7 @@ export class GameControlComponent implements OnInit {
     // this.gameState.emit({
     //   running: false
     // });
-    // console.log('End game' + this.gameState);
+    console.log('End game');
   }
 
 }
