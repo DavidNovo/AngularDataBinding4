@@ -8,7 +8,12 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class GameControlComponent implements OnInit {
   title = 'Game Control Component';
   /* Creating new events. Sending data out of the component*/
-  @Output() gameState = new EventEmitter<{running: boolean}>(true);
+  /* I was using the emmitter to send state of game, not a number */
+  // old =>@Output() gameState = new EventEmitter<{running: boolean}>(true);
+  @Output() intervalFired = new EventEmitter<number>();
+
+  interval;
+  lastNumber = 0;
 
   constructor() {
   }
@@ -17,15 +22,21 @@ export class GameControlComponent implements OnInit {
   }
 
   startGame() {
-    this.gameState.emit({
-      running: true});
-    console.log('Start game' + this.gameState);
+    // this.gameState.emit({
+    //   running: true});
+    // console.log('Start game' + this.gameState);
+    this.interval = setInterval(() => {
+      this.intervalFired.emit(this.lastNumber + 1);
+      this.lastNumber++;
+    }, 1000);
   }
 
   stopGame() {
-    this.gameState.emit({
-      running: false});
-    console.log('End game' + this.gameState);
+    clearInterval(this.interval);
+    // this.gameState.emit({
+    //   running: false
+    // });
+    // console.log('End game' + this.gameState);
   }
 
 }
